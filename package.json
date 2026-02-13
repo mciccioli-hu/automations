@@ -1,0 +1,49 @@
+{
+  "name": "real-estate-post-generator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Generador de posteos para redes sociales - Inmobiliarias",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mciccioli-hu/automations.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "prisma": {
+    "seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/mciccioli-hu/automations/issues"
+  },
+  "homepage": "https://github.com/mciccioli-hu/automations#readme",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "archiver": "^7.0.1",
+    "next": "^14.2.35",
+    "prisma": "^5.22.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sharp": "^0.33.5",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/archiver": "^6.0.4",
+    "@types/node": "^20.19.33",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
+    "@types/uuid": "^9.0.8",
+    "autoprefixer": "^10.4.24",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,272 @@
+import { TemplateDefinition } from '@/lib/types';
+
+/**
+ * COLLAGE 3 — 1 foto grande arriba + 2 fotos chicas abajo.
+ * Layout "T invertida". Ideal para mostrar panorámica + detalles.
+ */
+export const collage3: TemplateDefinition = {
+  id: 'collage-3',
+  version: '1.0.0',
+  name: 'Collage 3 Fotos',
+  description: '1 foto grande arriba + 2 fotos chicas abajo',
+  category: 'collage',
+  imageCount: 3,
+  supportedFormats: ['1080x1080', '1080x1350'],
+  safeArea: { top: 40, bottom: 40, left: 40, right: 40 },
+  tags: ['collage', '3-fotos', 'triple'],
+  slides: {
+    '1080x1080': [
+      {
+        id: 'main',
+        backgroundColor: 'brand.primary',
+        layers: [
+          // Big image (top)
+          {
+            type: 'image',
+            id: 'img-top',
+            imageIndex: 0,
+            rect: { x: 20, y: 20, width: 1040, height: 520 },
+            fit: 'cover',
+            borderRadius: 12,
+            zIndex: 1,
+          },
+          // Small image (bottom-left)
+          {
+            type: 'image',
+            id: 'img-bottom-left',
+            imageIndex: 1,
+            rect: { x: 20, y: 548, width: 510, height: 340 },
+            fit: 'cover',
+            borderRadius: 12,
+            zIndex: 1,
+          },
+          // Small image (bottom-right)
+          {
+            type: 'image',
+            id: 'img-bottom-right',
+            imageIndex: 2,
+            rect: { x: 538, y: 548, width: 522, height: 340 },
+            fit: 'cover',
+            borderRadius: 12,
+            zIndex: 1,
+          },
+          // Info bar at bottom
+          {
+            type: 'shape',
+            id: 'info-bar',
+            shape: 'rect',
+            rect: { x: 0, y: 900, width: 1080, height: 180 },
+            fill: 'brand.primary',
+            zIndex: 2,
+          },
+          // Title + Price row
+          {
+            type: 'text',
+            id: 'title',
+            field: 'title',
+            rect: { x: 60, y: 915, width: 580, height: 40 },
+            style: {
+              fontFamily: 'Inter',
+              color: '#FFFFFF',
+              fontSize: 30,
+              fontWeight: 'bold',
+              textAlign: 'left',
+              maxLines: 1,
+            },
+            zIndex: 3,
+          },
+          {
+            type: 'text',
+            id: 'price',
+            field: 'price',
+            rect: { x: 660, y: 910, width: 360, height: 48 },
+            style: {
+              fontFamily: 'Inter',
+              color: '#FFFFFF',
+              fontSize: 38,
+              fontWeight: 'black',
+              textAlign: 'right',
+            },
+            zIndex: 3,
+          },
+          // Location + Features
+          {
+            type: 'text',
+            id: 'location',
+            field: 'location',
+            rect: { x: 60, y: 960, width: 400, height: 30 },
+            style: {
+              fontFamily: 'Inter',
+              color: 'brand.secondary',
+              fontSize: 22,
+              fontWeight: 'normal',
+              textAlign: 'left',
+            },
+            zIndex: 3,
+          },
+          {
+            type: 'text',
+            id: 'features',
+            field: 'features',
+            rect: { x: 60, y: 995, width: 600, height: 30 },
+            style: {
+              fontFamily: 'Inter',
+              color: '#AAAAAA',
+              fontSize: 20,
+              fontWeight: 'normal',
+              textAlign: 'left',
+              maxLines: 1,
+            },
+            zIndex: 3,
+          },
+          // Logo
+          {
+            type: 'logo',
+            id: 'logo',
+            rect: { x: 880, y: 970, width: 140, height: 70 },
+            fit: 'contain',
+            zIndex: 3,
+          },
+          // CTA
+          {
+            type: 'text',
+            id: 'cta',
+            field: 'cta',
+            rect: { x: 60, y: 1035, width: 500, height: 30 },
+            style: {
+              fontFamily: 'Inter',
+              color: 'brand.secondary',
+              fontSize: 18,
+              fontWeight: 'bold',
+              textAlign: 'left',
+            },
+            zIndex: 3,
+          },
+        ],
+      },
+    ],
+    '1080x1350': [
+      {
+        id: 'main',
+        backgroundColor: 'brand.primary',
+        layers: [
+          {
+            type: 'image',
+            id: 'img-top',
+            imageIndex: 0,
+            rect: { x: 20, y: 20, width: 1040, height: 660 },
+            fit: 'cover',
+            borderRadius: 12,
+            zIndex: 1,
+          },
+          {
+            type: 'image',
+            id: 'img-bottom-left',
+            imageIndex: 1,
+            rect: { x: 20, y: 688, width: 510, height: 380 },
+            fit: 'cover',
+            borderRadius: 12,
+            zIndex: 1,
+          },
+          {
+            type: 'image',
+            id: 'img-bottom-right',
+            imageIndex: 2,
+            rect: { x: 538, y: 688, width: 522, height: 380 },
+            fit: 'cover',
+            borderRadius: 12,
+            zIndex: 1,
+          },
+          {
+            type: 'shape',
+            id: 'info-bar',
+            shape: 'rect',
+            rect: { x: 0, y: 1088, width: 1080, height: 262 },
+            fill: 'brand.primary',
+            zIndex: 2,
+          },
+          {
+            type: 'text',
+            id: 'title',
+            field: 'title',
+            rect: { x: 60, y: 1110, width: 580, height: 45 },
+            style: {
+              fontFamily: 'Inter',
+              color: '#FFFFFF',
+              fontSize: 34,
+              fontWeight: 'bold',
+              textAlign: 'left',
+              maxLines: 1,
+            },
+            zIndex: 3,
+          },
+          {
+            type: 'text',
+            id: 'price',
+            field: 'price',
+            rect: { x: 660, y: 1105, width: 360, height: 55 },
+            style: {
+              fontFamily: 'Inter',
+              color: '#FFFFFF',
+              fontSize: 42,
+              fontWeight: 'black',
+              textAlign: 'right',
+            },
+            zIndex: 3,
+          },
+          {
+            type: 'text',
+            id: 'location',
+            field: 'location',
+            rect: { x: 60, y: 1165, width: 400, height: 35 },
+            style: {
+              fontFamily: 'Inter',
+              color: 'brand.secondary',
+              fontSize: 24,
+              fontWeight: 'normal',
+              textAlign: 'left',
+            },
+            zIndex: 3,
+          },
+          {
+            type: 'text',
+            id: 'features',
+            field: 'features',
+            rect: { x: 60, y: 1210, width: 600, height: 35 },
+            style: {
+              fontFamily: 'Inter',
+              color: '#AAAAAA',
+              fontSize: 22,
+              fontWeight: 'normal',
+              textAlign: 'left',
+              maxLines: 1,
+            },
+            zIndex: 3,
+          },
+          {
+            type: 'logo',
+            id: 'logo',
+            rect: { x: 880, y: 1200, width: 140, height: 70 },
+            fit: 'contain',
+            zIndex: 3,
+          },
+          {
+            type: 'text',
+            id: 'cta',
+            field: 'cta',
+            rect: { x: 60, y: 1270, width: 500, height: 35 },
+            style: {
+              fontFamily: 'Inter',
+              color: 'brand.secondary',
+              fontSize: 20,
+              fontWeight: 'bold',
+              textAlign: 'left',
+            },
+            zIndex: 3,
+          },
+        ],
+      },
+    ],
+    '1080x1920': [] as any,
+  },
+};
