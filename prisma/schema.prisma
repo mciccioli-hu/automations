@@ -1,0 +1,141 @@
+// ============================================================
+// Prisma Schema for Real Estate Post Generator
+// ============================================================
+//
+// To apply: npx prisma migrate dev --name init
+// To generate client: npx prisma generate
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// --- Agency / Brand (Multi-tenant) ---
+
+model Agency {
+  id              String   @id @default(cuid())
+  name            String
+  slug            String   @unique
+  logoUrl         String?
+  primaryColor    String   @default("#1a365d")
+  secondaryColor  String   @default("#e2e8f0")
+  fontFamily      String   @default("Inter")
+  instagramHandle String?
+  whatsapp        String?
+  website         String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  users    User[]
+  projects PostProject[]
+
+  @@index([slug])
+}
+
+// --- Users ---
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  role      String   @default("agent") // "admin" | "agent"
+  agencyId  String
+  agency    Agency   @relation(fields: [agencyId], references: [id])
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projects PostProject[]
+
+  @@index([agencyId])
+  @@index([email])
+}
+
+// --- Templates ---
+
+model Template {
+  id          String   @id
+  version     String
+  name        String
+  description String
+  category    String   // "hero" | "collage" | "carousel"
+  imageCount  Int
+  maxImages   Int?
+  definition  Json     // Full TemplateDefinition JSON
+  thumbnail   String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  projects PostProject[]
+
+  @@unique([id, version])
+  @@index([category])
+  @@index([isActive])
+}
+
+// --- Post Projects (drafts & completed) ---
+
+model PostProject {
+  id              String   @id @default(cuid())
+  userId          String
+  agencyId        String
+  listingUrl      String
+  propertyData    Json     // PropertyData normalizado
+  selectedImages  Json     // [{ url, order, cropData? }]
+  templateId      String
+  templateVersion String
+  format          String   // "1080x1080" | "1080x1350" | "1080x1920"
+  customTexts     Json     // PostTexts: { title, price, location, features, cta }
+  brandOverrides  Json?    // Optional brand overrides for this project
+  status          String   @default("draft") // "draft" | "generating" | "exported" | "error"
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id])
+  agency   Agency   @relation(fields: [agencyId], references: [id])
+  template Template @relation(fields: [templateId], references: [id])
+  exports  Export[]
+
+  @@index([userId])
+  @@index([agencyId])
+  @@index([status])
+  @@index([createdAt(sort: Desc)])
+}
+
+// --- Exports (generated files) ---
+
+model Export {
+  id        String   @id @default(cuid())
+  projectId String
+  files     Json     // [{ key, name, size, format, storageUrl? }]
+  caption   String?  @db.Text
+  hashtags  String?  @db.Text
+  format    String   // "1080x1080" | "1080x1350" | "1080x1920"
+  createdAt DateTime @default(now())
+
+  project PostProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+  @@index([createdAt(sort: Desc)])
+}
+
+// --- Scrape Cache (optional, for caching scraped data) ---
+
+model ScrapeCache {
+  id        String   @id @default(cuid())
+  url       String   @unique
+  portal    String
+  data      Json     // Full ScrapeResult
+  imageUrls Json     // [string] — URLs of scraped images
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([url])
+  @@index([expiresAt])
+}
