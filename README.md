@@ -1,10 +1,9 @@
-# Generador de Posteos para Inmobiliarias
+# Generador de Posteos
 
-Aplicación para generar posts profesionales de Instagram a partir de publicaciones en portales inmobiliarios (Zonaprop, Mercado Libre, Argenprop).
+Aplicación para generar posts profesionales de Instagram.
 
 ## Funcionalidades
 
-- **Scraping automático**: Pegá un link de Zonaprop y obtenés fotos + datos de la propiedad.
 - **6 Templates**: Hero Overlay, Hero Minimal, Collage 2/3/4 fotos, Carrusel con Cover.
 - **Formatos Instagram**: 1080x1080 (feed cuadrado), 1080x1350 (feed vertical), 1080x1920 (stories).
 - **Branding**: Logo, colores primario/secundario, datos de contacto.
